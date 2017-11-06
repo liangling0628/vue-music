@@ -10,6 +10,13 @@ export const recommendParams = {
   _: 1509678608280
 }
 
+export const dicsListParams = {
+  g_tk: 1928093487,
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  format: 'jsonp'
+}
 export const option =
   {
     param: 'jsonpCallback'

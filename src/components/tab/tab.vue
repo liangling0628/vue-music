@@ -31,9 +31,10 @@
       text-align: center
       .tab-link
         padding-bottom: 5px
-        color: $color-text-l
+        color: rgba(0, 0, 0, .6)
+        bold: 600
       &.router-link-active
         .tab-link
-          color: $color-theme
-          border-bottom: 2px solid $color-theme
+          color: #31c27c
+          border-bottom: 2px solid #31c27c
 </style>

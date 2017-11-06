@@ -1,7 +1,7 @@
 <template>
   <div class="m-header">
     <div class="icon"></div>
-    <h1 class="text">Vue Music</h1>
+    <!--<h1 class="text">Vue Music</h1>-->
   </div>
 </template>
 
@@ -18,15 +18,16 @@
     text-align: center
     color: $color-theme
     font-size: 0
+    background:#31c27c
     .icon
-      display: inline-block
-      vertical-align: top
-      margin-top: 6px
-      width: 30px
-      height: 32px
-      margin-right: 9px
+      float: left
+      display: block
+      width: 90px
+      height: 25px
+      margin: 9px 0 0 10px
+      text-indent: -9999px;
       bg-image('logo')
-      background-size: 30px 32px
+      background-size: cover
     .text
       display: inline-block
       vertical-align: top
