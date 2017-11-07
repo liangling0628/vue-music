@@ -16,7 +16,7 @@
           <ul>
             <li @click="selectItem(item)" v-for="item in discList" class="item">
               <div class="icon">
-                <img v-lazy="item.imgurl" width="60" height="60"/>
+                <img v-lazy="item.imgurl" width="60" height="60" style="border-radius: 8px"/>
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -27,6 +27,7 @@
         </div>
       </div>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -34,8 +35,11 @@
   import {getRecommend, getDiscList} from '../../api/recommend'
   import Scroll from '../../base/scroll/scroll'
   import Slider from '../../base/slider/slider'
+  import {mapMutations} from 'vuex'
+  import {playlistMixin} from '../../common/js/mixin'
 
   export default {
+    mixins: [playlistMixin],
     data() {
       return {
         recommends: [],
@@ -62,13 +66,23 @@
         }
       },
       _getDiscList() {
-        getDiscList().then((res) => {
-          if (res.code === 0) {
+        let disc = getDiscList()
+        setTimeout(() => {
+          disc.then((res) => {
             console.log(res.data)
             this.discList = res.data.list
-          }
+          })
+        }, 200)
+      },
+      selectItem(item) {
+        this.$router.push({
+          path: `/recommend/${item.dissid}`
         })
-      }
+        this.setDisc(item)
+      },
+      ...mapMutations({
+        setDisc: 'SET_DISC'
+      })
     },
     components: {
       Scroll,
@@ -97,8 +111,9 @@
           height: 65px
           line-height: 65px
           text-align: center
-          font-size: $font-size-medium
-          color: $color-theme
+          font-size: 16px;
+          color: rgba(0, 0, 0, .6);
+          font-weight: 500;
         .item
           display: flex
           box-sizing: border-box
@@ -118,9 +133,9 @@
             font-size: $font-size-medium
             .name
               margin-bottom: 10px
-              color: $color-text
+              color: #333
             .desc
-              color: $color-text-d
+              color: #9E9E9E
       .loading-container
         position: absolute
         width: 100%

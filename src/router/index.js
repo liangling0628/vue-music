@@ -10,6 +10,12 @@ const Recommend = (resolve) => {
     resolve(module)
   })
 }
+
+const Disc = (resolve) => {
+  import('../components/disc/disc').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(VueRouter)
 
 export default new VueRouter(
@@ -19,7 +25,11 @@ export default new VueRouter(
       redirect: '/recommend'
     }, {
       path: '/recommend',
-      component: Recommend
+      component: Recommend,
+      children: [{
+        path: ':id',
+        component: Disc
+      }]
     }, {
       path: '/singer',
       component: Singer

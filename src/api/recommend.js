@@ -1,5 +1,5 @@
 import jsonp from '../common/js/jsonp'
-import {recommendParams, dicsListParams, option} from '../common/js/config'
+import {recommendParams, dicsListParams, sonlistParams, option} from '../common/js/config'
 import axios from 'axios'
 
 export function getRecommend() {
@@ -22,7 +22,17 @@ export function getDiscList() {
     format: 'json'
   })
 
-  axios.get(url, {
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
+
+export function getSonList(id) {
+  const url = '/api/getSonList'
+  const data = Object.assign({}, sonlistParams, {disstid: id})
+  return axios.get(url, {
     params: data
   }).then((res) => {
     return Promise.resolve(res.data)
