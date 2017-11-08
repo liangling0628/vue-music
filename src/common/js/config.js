@@ -39,11 +39,30 @@ export const sonlistParams = {
   song_num: 15,
   _: Math.random()
 }
-export const option =
-  {
-    param: 'jsonpCallback'
-  }
 
+export const songParmas = {
+  g_tk: 5381,
+  uin: 0,
+  format: 'jsonp',
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  platform: 'h5',
+  needNewCode: 1,
+  nobase64: 1,
+  songtype: 0,
+  _: +new Date(),
+  jsonpCallback: 'jsonp1'
+}
+
+export const option = {
+  param: 'jsonpCallback'
+}
+
+export const lyricOption = {
+  param: 'jsonpCallback',
+  name: 'MusicJsonCallback_lrc'
+}
 export const ERR_OK = 0
 
 export const playMode = {

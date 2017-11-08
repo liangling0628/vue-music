@@ -1,3 +1,5 @@
+import {getLyric} from '../../api/song'
+
 export default class Song {
   constructor({id, mid, singer, name, album, duration, image, url}) {
     this.id = id
@@ -9,6 +11,24 @@ export default class Song {
     this.image = image
     this.url = url
   }
+
+  getLyric() {
+    if (this.lyric) {
+      return Promise.resolve(this.lyric)
+    }
+    let m = this.id
+    return new Promise((resolve, reject) => {
+      let ly = getLyric(m)
+      setTimeout(() => {
+        ly && ly.then((res) => {
+          console.log(res)
+          if (res.code === 0) {
+            resolve(res.lyric)
+          }
+        })
+      }, 20)
+    })
+  }
 }
 
 export function createSong(musicData) {
@@ -19,7 +39,7 @@ export function createSong(musicData) {
     name: musicData.name,
     album: musicData.album.name,
     duration: musicData.interval,
-    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album.id}.jpg?max_age=2592000`,
+    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.mid}.jpg?max_age=2592000`,
     url: `http://ws.stream.qqmusic.qq.com/${musicData.id}.m4a?fromtag=46`
   })
 }

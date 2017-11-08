@@ -21,6 +21,9 @@ const mutations = {
   },
   [types.SET_PLAY_MODE](state, mode) {
     state.mode = mode
+  },
+  [types.SET_PLAY_HISTORY](state, history) {
+    state.playHistory = history
   }
 
 }

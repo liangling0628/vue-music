@@ -59,7 +59,7 @@
     },
     data() {
       return {
-        scrollY: 0
+        scrollY: 11
       }
     },
     computed: {
