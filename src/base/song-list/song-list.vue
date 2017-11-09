@@ -6,7 +6,7 @@
           <span :class="getRankCls(index)" v-text="getRankText(index)"></span>
         </div>
         <div class="content">
-          <h2 class="name">{{song.name}}</h2>
+          <h2 :class="h2class" @mouseover="enter" @mouseout="leave">{{song.name}}</h2>
           <p class="desc">{{getDesc(song)}}</p>
         </div>
       </li>
@@ -26,6 +26,11 @@
         default: false
       }
     },
+    data() {
+      return {
+        h2class: 'name'
+      }
+    },
     methods: {
       selectItem(item, index) {
         this.$emit('select', item, index)
@@ -34,17 +39,24 @@
         return `${song.singer}.${song.album}`
       },
       getRankCls(index) {
-        if (index <= 2) {
-          return `icon icon${index}`
-        } else {
-          return 'text'
-        }
+//        if (index <= 2) {
+//          return `icon icon${index}`
+//        } else {
+        return 'text'
+//        }
       },
       getRankText(index) {
-        if (index > 2) {
-          return index + 1
-        }
+//        if (index > 2) {
+        return index + 1
+//        }
+      },
+      enter() {
+        this.h2class = 'name-enter'
+      },
+      leave() {
+        this.h2class = 'name'
       }
+
     }
 
   }
@@ -78,7 +90,7 @@
           &.icon2
             bg-image2('third')
         .text
-          color: $color-theme
+          color: #999
           font-size: $font-size-large
       .content
         flex: 1
@@ -87,6 +99,9 @@
         .name
           no-wrap()
           color: #333
+        .name-enter
+          no-wrap()
+          color: #31c27c
         .desc
           no-wrap()
           margin-top: 4px

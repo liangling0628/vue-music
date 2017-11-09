@@ -12,7 +12,7 @@ import './common/stylus/index.styl'
 fastclick.attach(document.body)
 
 Vue.use(VueLazyLoad, {
-  loading: require('./common/image/default.png')
+  loading: require('./common/image/1.jpg')
 })
 // Vue.config.productionTip = false
 

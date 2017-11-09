@@ -7,7 +7,7 @@ export const recommendParams = {
   notice: 0,
   platform: 'h5',
   needNewCode: 1,
-  _: 1509678608280
+  _: +new Date()
 }
 
 export const dicsListParams = {

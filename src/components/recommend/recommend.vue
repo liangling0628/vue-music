@@ -37,6 +37,7 @@
   import Slider from '../../base/slider/slider'
   import {mapMutations} from 'vuex'
   import {playlistMixin} from '../../common/js/mixin'
+  import {ERR_OK} from '../../common/js/config'
 
   export default {
     mixins: [playlistMixin],
@@ -53,8 +54,10 @@
     methods: {
       _getRecommend() {
         getRecommend().then((res) => {
-          console.log(res.data)
-          this.recommends = res.data.slider
+          if (res.code === ERR_OK) {
+            console.log(res.data)
+            this.recommends = res.data.slider
+          }
         }).catch((err) => {
           console.log(err)
         })
@@ -66,13 +69,12 @@
         }
       },
       _getDiscList() {
-        let disc = getDiscList()
-        setTimeout(() => {
-          disc.then((res) => {
+        getDiscList().then((res) => {
+          if (res.code === ERR_OK) {
             console.log(res.data)
             this.discList = res.data.list
-          })
-        }, 200)
+          }
+        })
       },
       selectItem(item) {
         this.$router.push({

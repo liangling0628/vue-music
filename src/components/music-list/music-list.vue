@@ -164,7 +164,7 @@
         display: block
         padding: 10px
         font-size: $font-size-large-x
-        color: $color-theme
+        color: #31c27c;
     .title
       position: absolute
       top: 0
@@ -194,8 +194,9 @@
           padding: 7px 0
           margin: 0 auto
           text-align: center
-          border: 1px solid $color-theme
-          color: $color-theme
+          border: 2px solid #31c27c
+          background-color: #31c27c
+          color: #f6f2f2
           border-radius: 100px
           font-size: 0
           .icon-play
@@ -206,7 +207,7 @@
           .text
             display: inline-block
             vertical-align: middle
-            font-size: $font-size-small
+            font-size: $font-size-medium-x
       .filter
         position: absolute
         top: 0
