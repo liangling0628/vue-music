@@ -24,21 +24,21 @@ const proxyTable = config.dev.proxyTable
 
 const app = express()
 const apiRouter = express.Router()
-
-apiRouter.get('/getDiscList', (req, res) => {
-  var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-  axios.get(url, {
-    headers: {
-      referer: 'https://c.y.qq.com/',
-      host: 'c.y.qq.com'
-    },
-    params: req.query
-  }).then((response) => {
-    res.json(response.data)
-  }).catch((e) => {
-    console.log(e)
+https://c.y.qq.com/v8/fcg-bin/album_library
+  apiRouter.get('/getDiscList', (req, res) => {
+    var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+    axios.get(url, {
+      headers: {
+        referer: 'https://c.y.qq.com/',
+        host: 'c.y.qq.com'
+      },
+      params: req.query
+    }).then((response) => {
+      res.json(response.data)
+    }).catch((e) => {
+      console.log(e)
+    })
   })
-})
 
 apiRouter.get('/getSonList', (req, res) => {
   var url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
@@ -49,7 +49,16 @@ apiRouter.get('/getSonList', (req, res) => {
     },
     params: req.query
   }).then((response) => {
-    res.json(response.data)
+    var ret = response.data
+    if (typeof ret === 'string') {
+      var reg = /^\w+\(({[^()]+})\)$/
+      var matches = ret.match(reg)
+      // console.log(ret)
+      if (matches) {
+        ret = JSON.parse(matches[1])
+      }
+    }
+    res.json(ret)
   }).catch((e) => {
     console.log(e)
   })
@@ -69,7 +78,6 @@ apiRouter.get('/lyric', function (req, res) {
     if (typeof ret === 'string') {
       var reg = /^\w+\(({[^()]+})\)$/
       var matches = ret.match(reg)
-      console.log(ret)
       if (matches) {
         ret = JSON.parse(matches[1])
       }
@@ -81,7 +89,20 @@ apiRouter.get('/lyric', function (req, res) {
   })
 })
 
-
+apiRouter.get('/singerdetail', (req, res) => {
+  let url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    res.json(response.data)
+  }).catch((e) => {
+    console.log(e)
+  })
+})
 app.use('/api', apiRouter)
 
 const compiler = webpack(webpackConfig)

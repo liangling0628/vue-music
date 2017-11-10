@@ -11,7 +11,8 @@ const state = {
   fullScreen: false,
   favoriteList: [],
   currentSong: {},
-  playHistory: loadPlay()
+  playHistory: loadPlay(),
+  singer: {}
 }
 
 export default state

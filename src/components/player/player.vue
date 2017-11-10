@@ -1,5 +1,5 @@
 <template>
-  <div class="player" v-show="playlist.length>0&&currentSong">
+  <div class="player" v-show="playlist.length>0">
     <transition name="normal"
                 @enter="enter"
                 @after-enter="afterEnter"
@@ -462,7 +462,7 @@
       top: 0
       bottom: 0
       z-index: 150
-      background: $color-background
+      background: #9E9E9E
       .background
         position: absolute
         left: 0
@@ -641,7 +641,7 @@
       z-index: 180
       width: 100%
       height: 60px
-      background: $color-highlight-background
+      background: rgba(0, 0, 0, .4)
       &.mini-enter-active, &.mini-leave-active
         transition: all 0.4s
       &.mini-enter, &.mini-leave-to
@@ -667,18 +667,18 @@
           margin-bottom: 2px
           no-wrap()
           font-size: $font-size-medium
-          color: $color-text
+          color: #444
         .desc
           no-wrap()
           font-size: $font-size-small
-          color: $color-text-d
+          color: #666
       .control
         flex: 0 0 30px
         width: 30px
         padding: 0 10px
         .icon-play-mini, .icon-pause-mini, .icon-playlist
           font-size: 30px
-          color: $color-theme-d
+          color: $color-theme
         .icon-mini
           font-size: 32px
           position: absolute

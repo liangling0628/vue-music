@@ -24,6 +24,9 @@ const mutations = {
   },
   [types.SET_PLAY_HISTORY](state, history) {
     state.playHistory = history
+  },
+  [types.SET_SINGER](state, singer) {
+    state.singer = singer
   }
 
 }

@@ -1,4 +1,6 @@
 import {getLyric} from '../../api/song'
+import {ERR_OK} from '../../common/js/config'
+import {Base64} from 'js-base64'
 
 export default class Song {
   constructor({id, mid, singer, name, album, duration, image, url}) {
@@ -18,15 +20,14 @@ export default class Song {
     }
     let m = this.id
     return new Promise((resolve, reject) => {
-      let ly = getLyric(m)
-      setTimeout(() => {
-        ly && ly.then((res) => {
-          console.log(res)
-          if (res.code === 0) {
-            resolve(res.lyric)
-          }
-        })
-      }, 20)
+      return getLyric(m).then((res) => {
+        if (res.retcode === ERR_OK) {
+          this.lyric = Base64.decode(res.lyric)
+          resolve(this.lyric)
+        } else {
+          reject('get lyric error')
+        }
+      })
     })
   }
 }
@@ -41,6 +42,19 @@ export function createSong(musicData) {
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.mid}.jpg?max_age=2592000`,
     url: `http://ws.stream.qqmusic.qq.com/${musicData.id}.m4a?fromtag=46`
+  })
+}
+
+export function createSongNew(musicData) {
+  return new Song({
+    id: musicData.songid,
+    mid: musicData.songmid,
+    singer: filterSinger(musicData.singer),
+    name: musicData.songname,
+    album: musicData.albumname,
+    duration: musicData.interval,
+    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
+    url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
   })
 }
 

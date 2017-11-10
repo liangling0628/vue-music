@@ -5,9 +5,9 @@
       <li v-for="group in data" class="list-group" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
         <ul>
-          <li v-for="item in group.items" class="list-group-item ">
+          <li v-for="item in group.items" class="list-group-item icon-more" @click="selectItem(item)">
             <img class="avatar" v-lazy="item.avatar">
-            <span class="name ">{{item.name}}</span>
+            <span class="name">{{item.name}} </span>
           </li>
         </ul>
       </li>
@@ -72,6 +72,9 @@
       this.listHeight = []
     },
     methods: {
+      selectItem(item) {
+        this.$emit('select', item)
+      },
       scroll(pos) {
         this.scrollY = pos.y
       },
@@ -176,15 +179,17 @@
         display: flex
         align-items: center
         padding: 20px 0 0 30px
+        color: rgba(0, 0, 0, .6)
+        &.list-bgcolor
+          background: #fbfbfd
         .avatar
-          width: 50px
+          width: 50px !important
           height: 50px
           border-radius: 50%
         .name
           margin-left: 20px
-          color: rgba(0, 0, 0, .6)
           font-size: $font-size-medium
-          width: 100%
+          width: 75%
           height: 50px
           text-align: left
           line-height: 50px

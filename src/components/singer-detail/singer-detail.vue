@@ -5,11 +5,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getSonList} from '../../api/recommend'
-  import {mapGetters} from 'vuex'
-  import {createSongNew} from '../../common/js/song'
-  import MusicList from '../music-list/music-list'
+  import {getSingerDetail} from '../../api/singer'
   import {ERR_OK} from '../../common/js/config'
+  import {mapGetters} from 'vuex'
+  import MusicList from '../../components/music-list/music-list'
+  import {createSongNew} from '../../common/js/song'
 
   export default {
     data() {
@@ -19,36 +19,33 @@
     },
     computed: {
       title() {
-        return this.disc.dissname
+        return this.singer.name
       },
       bgImage() {
-        return this.disc.imgurl
+        return this.singer.avatar
       },
-      ...mapGetters([
-        'disc'])
+      ...mapGetters(['singer'])
     },
     created() {
-      this._getSongList()
+      this._getSingerDetail()
     },
     methods: {
-      _getSongList() {
-        if (!this.disc.dissid) {
-          this.$router.push('/recommend')
+      _getSingerDetail() {
+        if (!this.singer.singerid) {
+          this.$router.push('/singer')
           return
         }
-        getSonList(this.disc.dissid).then((res) => {
-          if (res.code === ERR_OK || res.length > 100) {
-            let ret = res.substr(21, res.length - 22)
-            ret = JSON.parse(ret)
-            console.log(ret.cdlist)
-            let cdlist = ret.cdlist.length > 0 ? ret.cdlist[0].songlist : []
-            this.songs = this._normalizeSongs(cdlist)
+        getSingerDetail(this.singer.singerid).then((res) => {
+          if (res.code === ERR_OK) {
+            this.songs = this._normalizeSongs(res.data.list)
+            console.log('singerDetail:' + res.data.list)
           }
         })
       },
       _normalizeSongs(list) {
         let ret = []
-        list.length > 0 && list.forEach((musicData, index) => {
+        list.forEach((item) => {
+          let {musicData} = item
           if (musicData.albumid) {
             ret.push(createSongNew(musicData))
           }
@@ -64,7 +61,7 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .slide-enter-active, .slide-leave-active
-    transation: all 0.3s
+    transition: all 0.3s
 
   .slide-enter, .slide-leave-to
     transform: translate3d(100%, 0, 0)
