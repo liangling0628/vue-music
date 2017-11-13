@@ -18,7 +18,7 @@ export function getSingerList() {
 }
 
 export function getSingerDetail(singerid) {
-  const url = '/api/singerdetail'
+  const url = 'http://119.23.229.199:8088/api/singerdetail'
   let par = Object.assign({}, singerDetailParams, {singerid: singerid})
   return axios.get(url, {params: par}).then((res) => {
     return Promise.resolve(res.data)

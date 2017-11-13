@@ -8,7 +8,7 @@ export function getRecommend() {
 }
 
 export function getDiscList() {
-  const url = '/api/getDiscList'
+  const url = 'http://119.23.229.199:8088/api/getDiscList'
 
   const data = Object.assign({}, dicsListParams, {
     platform: 'yqq',
@@ -30,7 +30,7 @@ export function getDiscList() {
 }
 
 export function getSonList(id) {
-  const url = '/api/getSonList'
+  const url = 'http://119.23.229.199:8088/api/getSonList'
   const data = Object.assign({}, sonlistParams, {disstid: id})
   return axios.get(url, {
     params: data

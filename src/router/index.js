@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Recommend from '../components/recommend/recommend'
-import Rank from '../components/rank/rank'
+// import Rank from '../components/rank/rank'
 import Search from '../components/search/search'
 
 const Recommend = (resolve) => {
@@ -24,6 +24,18 @@ const Singer = (resolve) => {
 
 const SingerDetail = (resolve) => {
   import('../components/singer-detail/singer-detail').then((module) => {
+    resolve(module)
+  })
+}
+
+const Rank = (resolve) => {
+  import('../components/rank/rank').then((module) => {
+    resolve(module)
+  })
+}
+
+const RankDetail = (resolve) => {
+  import('../components/rank-detail/rank-detail').then((module) => {
     resolve(module)
   })
 }
@@ -50,7 +62,11 @@ export default new VueRouter(
       }]
     }, {
       path: '/rank',
-      component: Rank
+      component: Rank,
+      children: [{
+        path: ':id',
+        component: RankDetail
+      }]
     }, {
       path: '/search',
       component: Search

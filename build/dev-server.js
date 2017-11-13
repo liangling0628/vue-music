@@ -103,6 +103,30 @@ apiRouter.get('/singerdetail', (req, res) => {
     console.log(e)
   })
 })
+
+apiRouter.get('/getRankList', (req, res) => {
+  let url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    console.log(response.data)
+    let ret = response.data
+    if (typeof ret === 'string') {
+      var reg = /^\w+\(({[^()]+})\)$/
+      var matches = ret.match(reg)
+      if (matches) {
+        ret = JSON.parse(matches[1])
+      }
+    }
+    res.json(ret)
+  }).catch((e) => {
+    console.log('server getRankList : ' + e)
+  })
+})
 app.use('/api', apiRouter)
 
 const compiler = webpack(webpackConfig)

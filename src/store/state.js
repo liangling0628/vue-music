@@ -12,7 +12,8 @@ const state = {
   favoriteList: [],
   currentSong: {},
   playHistory: loadPlay(),
-  singer: {}
+  singer: {},
+  topList: {}
 }
 
 export default state

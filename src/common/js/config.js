@@ -85,6 +85,32 @@ export const singerDetailParams = {
   _: +new Date()
 }
 
+export const rankDetailParams = {
+  tpl: 3,
+  page: 'detail',
+  type: 'top',
+  song_begin: 0,
+  song_num: 30,
+  g_tk: 982905839,
+  loginUin: 0,
+  hostUin: 0,
+  format: 'jsonp',
+  inCharset: 'utf8',
+  outCharset: 'utf-8',
+  notice: 0,
+  platform: 'yqq',
+  needNewCode: 0
+}
+export const rankParams = {
+  g_tk: 1928093487,
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  format: 'jsonp',
+  uin: 0,
+  needNewCode: 1,
+  platform: 'h5'
+}
 export const option = {
   param: 'jsonpCallback'
 }
@@ -93,6 +119,11 @@ export const lyricOption = {
   param: 'jsonpCallback',
   name: 'MusicJsonCallback_lrc'
 }
+export const rankOption = {
+  param: 'jsonpCallback',
+  name: 'MusicJsonCallbacktoplist'
+}
+
 export const ERR_OK = 0
 
 export const playMode = {
