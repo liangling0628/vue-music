@@ -101,6 +101,7 @@ export const rankDetailParams = {
   platform: 'yqq',
   needNewCode: 0
 }
+
 export const rankParams = {
   g_tk: 1928093487,
   inCharset: 'utf-8',
@@ -111,6 +112,7 @@ export const rankParams = {
   needNewCode: 1,
   platform: 'h5'
 }
+
 export const option = {
   param: 'jsonpCallback'
 }
@@ -119,6 +121,7 @@ export const lyricOption = {
   param: 'jsonpCallback',
   name: 'MusicJsonCallback_lrc'
 }
+
 export const rankOption = {
   param: 'jsonpCallback',
   name: 'MusicJsonCallbacktoplist'
@@ -130,4 +133,28 @@ export const playMode = {
   sequence: 0,
   loop: 1,
   random: 2
+}
+
+export const searchParams = {
+  g_tk: 5381,
+  uin: 0,
+  format: 'json',
+  inCharset: 'utf-8',
+  outCharset: 'utf-8',
+  notice: 0,
+  platform: 'h5',
+  needNewCode: 1,
+  w: '刘德华',
+  zhidaqu: 1,
+  catZhida: 1,
+  t: 0,
+  flag: 1,
+  ie: 'utf-8',
+  sem: 1,
+  aggr: 0,
+  perpage: 20,
+  n: 20,
+  p: 3,
+  remoteplace: 'txt.mqq.all',
+  _: +new Date()
 }

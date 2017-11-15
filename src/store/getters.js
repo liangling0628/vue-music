@@ -11,3 +11,4 @@ export const sequenceList = state => state.sequenceList
 export const favoriteList = state => state.favoriteList
 export const singer = state => state.singer
 export const topList = state => state.topList
+export const searchHistory = state => state.searchHistory

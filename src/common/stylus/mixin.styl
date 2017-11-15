@@ -3,10 +3,14 @@ bg-image($url)
   background-image: url($url + ".png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
     background-image: url($url + ".png")
+
 bg-image2($url)
   background-image: url($url + "@2x.png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
     background-image: url($url + "@3x.png")
+
+bg-image3($url)
+  background-image: url($url + "timg.jpg")
 
 // 不换行
 no-wrap()

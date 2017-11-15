@@ -100,6 +100,7 @@
   </div>
 </template>
 
+
 <script type="text/ecmascript-6">
   import {mapGetters, mapMutations, mapActions} from 'vuex'
   import animations from 'create-keyframe-animation'
@@ -125,18 +126,19 @@
         currentLyric: null,
         currentLineNum: 0,
         currentShow: 'cd',
-        playingLyric: ''
+        playingLyric: '',
+        playingNew: false
       }
     },
     computed: {
       cdCls() {
-        return this.playing ? 'play' : 'play pause'
+        return this.playingNew ? 'play' : 'play pause'
       },
       playIcon() {
-        return this.playing ? 'icon-pause' : 'icon-play'
+        return this.playingNew ? 'icon-pause' : 'icon-play'
       },
       miniIcon() {
-        return this.playing ? 'icon-pause-mini' : 'icon-play-mini'
+        return this.playingNew ? 'icon-pause-mini' : 'icon-play-mini'
       },
       disableCls() {
         return this.songReady ? '' : 'disable'
@@ -205,6 +207,9 @@
           return
         }
         this.setPlayingState(!this.playing)
+        this.playingNew = !this.playingNew
+        this.playingNew ? this.$refs.audio.play() : this.$refs.audio.pause()
+//        this._playing(this.playingNew)
         if (this.currentLyric) {
           this.currentLyric.togglePlay()
         }
@@ -220,6 +225,8 @@
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
         this.setPlayingState(true)
+        this.playingNew = true
+        this.playingNew ? this.$refs.audio.play() : this.$refs.audio.pause()
         if (this.currentLyric) {
           this.currentLyric.seek(0)
         }
@@ -237,8 +244,19 @@
             index = 0
           }
           this.setCurrentIndex(index)
-          if (!this.playing) {
-            this.togglePlaying()
+          clearTimeout(this.newTimeOut)
+          if (!this.playingNew) {
+            this.setPlayingState(false)
+            this.newTimeOut = setTimeout(() => {
+              this.playingNew = false
+              this.$refs.audio.pause()
+            }, 500)
+          } else {
+            this.setPlayingState(true)
+            this.newTimeOut = setTimeout(() => {
+              this.playingNew = true
+              this.$refs.audio.play()
+            }, 500)
           }
         }
         this.songReady = false
@@ -256,8 +274,19 @@
             index = this.playlist.length - 1
           }
           this.setCurrentIndex(index)
-          if (!this.playing) {
-            this.togglePlaying()
+          clearTimeout(this.newTimeOut)
+          if (!this.playingNew) {
+            this.setPlayingState(false)
+            this.newTimeOut = setTimeout(() => {
+              this.playingNew = false
+              this.$refs.audio.pause()
+            }, 500)
+          } else {
+            this.setPlayingState(true)
+            this.newTimeOut = setTimeout(() => {
+              this.playingNew = true
+              this.$refs.audio.play()
+            }, 500)
           }
         }
         this.songReady = false
@@ -400,6 +429,12 @@
           scale
         }
       },
+      _playing(newPlaying) {
+        const audio = this.$refs.audio
+        this.$nextTick(() => {
+          newPlaying ? audio.play() : audio.pause()
+        })
+      },
       ...mapMutations({
         setFullScreen: 'SET_FULL_SCREEN'
       }),
@@ -409,6 +444,9 @@
     },
     watch: {
       currentSong(newSong, oldSong) {
+        if (!this.oldSong) {
+          this.playingNew = false
+        }
         if (!newSong.id) {
           return
         }
@@ -423,15 +461,11 @@
         }
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
-          this.$refs.audio.play()
+//          this.$refs.audio.pause()
+          this.songReady = true
+          this.savePlayHistory(this.currentSong)
           this.getLyric()
         }, 1000)
-      },
-      playing(newPlaying) {
-        const audio = this.$refs.audio
-        this.$nextTick(() => {
-          newPlaying ? audio.play() : audio.pause()
-        })
       },
       fullScreen(newVal) {
         if (newVal) {

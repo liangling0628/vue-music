@@ -104,6 +104,22 @@ apiRouter.get('/singerdetail', (req, res) => {
   })
 })
 
+apiRouter.get('/searchKey', (req, res) => {
+  let url = 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    res.json(response.data)
+  }).catch((e) => {
+    console.log(e)
+  })
+})
+
+
 apiRouter.get('/getRankList', (req, res) => {
   let url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg'
   axios.get(url, {

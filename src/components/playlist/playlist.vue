@@ -158,7 +158,7 @@
       left: 0
       bottom: 0
       width: 100%
-      background-color: $color-highlight-background
+      background-color: #f9f9f9
       .list-header
         position: relative
         padding: 20px 30px 10px 20px
@@ -168,16 +168,16 @@
           .icon
             margin-right: 10px
             font-size: 30px
-            color: $color-theme-d
+            color: rgba(49, 194, 124, 1)
           .text
             flex: 1
             font-size: $font-size-medium
-            color: $color-text-l
+            color: rgba(0, 0, 0, .7)
           .clear
             extend-click()
             .icon-clear
               font-size: $font-size-medium
-              color: $color-text-d
+              color: rgba(0, 0, 0, .7)
       .list-content
         max-height: 240px
         overflow: hidden
@@ -195,12 +195,12 @@
             flex: 0 0 20px
             width: 20px
             font-size: $font-size-small
-            color: $color-theme-d
+            color: rgba(49,194,124,1)
           .text
             flex: 1
             no-wrap()
             font-size: $font-size-medium
-            color: $color-text-d
+            color: rgba(0, 0, 0, .7)
           .like
             extend-click()
             margin-right: 15px
@@ -221,7 +221,7 @@
           padding: 8px 16px
           border: 1px solid $color-text-l
           border-radius: 100px
-          color: $color-text-l
+          background: rgba(49, 194, 124, 1)
           .icon-add
             margin-right: 5px
             font-size: $font-size-small-s
@@ -230,7 +230,8 @@
       .list-close
         text-align: center
         line-height: 50px
-        background: $color-background
+        background: rgba(49, 194, 124, 1)
         font-size: $font-size-medium-x
         color: $color-text-l
+        font-weight: 700
 </style>
