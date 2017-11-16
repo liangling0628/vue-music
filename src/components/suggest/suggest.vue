@@ -66,7 +66,7 @@
       },
       _normarizeData(data) {
         let ret = []
-        if (data.zhida && data.zhida.singerid) {
+        if (data.zhida && data.zhida.singerid && this.result.length < 1) {
           ret.push({...data.zhida, ...{type: TYPE_SINGER}})
         }
         if (data.song) {
@@ -146,7 +146,9 @@
     },
     watch: {
       query(newQuery) {
-        this.search(newQuery)
+        if (newQuery && newQuery.length > 0) {
+          this.search(newQuery)
+        }
       }
     },
     components: {

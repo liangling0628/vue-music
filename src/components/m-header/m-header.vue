@@ -1,6 +1,10 @@
 <template>
   <div class="m-header">
     <div class="icon"></div>
+    Vue Music
+    <router-link tag="div" class="mine" to="/user">
+      <i class="icon-mine"></i>
+    </router-link>
     <!--<h1 class="text">Vue Music</h1>-->
   </div>
 </template>
@@ -15,14 +19,15 @@
   .m-header
     position: relative
     height: 44px
-    text-align: center
-    color: $color-theme
-    font-size: 0
-    background:#31c27c
+    font-size: 16px
+    background: #31c27c
+    color: #fff
+    line-height: 44px
+    background: #31c27c
     .icon
       float: left
       display: block
-      width: 90px
+      width: 30px
       height: 25px
       margin: 9px 0 0 10px
       text-indent: -9999px;
@@ -41,5 +46,5 @@
         display: block
         padding: 12px
         font-size: 20px
-        color: $color-theme
+        color: #f9f9f9
 </style>

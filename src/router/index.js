@@ -39,6 +39,12 @@ const RankDetail = (resolve) => {
     resolve(module)
   })
 }
+
+const User = (resolve) => {
+  import('../components/user/user').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(VueRouter)
 
 export default new VueRouter(
@@ -74,6 +80,9 @@ export default new VueRouter(
         path: ':id',
         component: SingerDetail
       }]
+    }, {
+      path: '/user',
+      component: User
     }]
   }
 )

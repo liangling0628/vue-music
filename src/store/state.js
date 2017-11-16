@@ -1,5 +1,5 @@
 import {playMode} from '../common/js/config'
-import {loadPlay, loadSearh} from '../common/js/cache'
+import {loadPlay, loadSearh, loadFavarite} from '../common/js/cache'
 
 const state = {
   disc: {},
@@ -9,7 +9,7 @@ const state = {
   currentIndex: -1,
   playing: false,
   fullScreen: false,
-  favoriteList: [],
+  favoriteList: loadFavarite(),
   currentSong: {},
   playHistory: loadPlay(),
   singer: {},

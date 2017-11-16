@@ -1,7 +1,7 @@
 import * as types from './mutation_types'
 import {playMode} from '../common/js/config'
 import {shuffle} from '../common/js/until'
-import {saveFavarite, deleteFavarite, saveSearch, deleteSearch, clearSearch} from '../common/js/cache'
+import {saveFavarite, deleteFavarite, saveSearch, deleteSearch, clearSearch, savePlay} from '../common/js/cache'
 
 export const selectPlay = function ({commit, state}, {list, index}) {
   commit(types.SET_SEQUENCE_LIST, list)
@@ -30,7 +30,7 @@ export const randomPlay = function ({commit, state}, {list}) {
   commit(types.SET_PLAYLIST, randomList)
   commit(types.SET_CURRENT_INDEX, 0)
   commit(types.SET_FULL_SCREEN, true)
-  commit(types.SET_PLAYING_STATE, true)
+  commit(types.SET_PLAYING_STATE, false)
 }
 
 export const saveFavoriteList = function ({commit}, song) {
@@ -42,7 +42,7 @@ export const deleteFavariateList = function ({commit}, song) {
 }
 
 export const savePlayHistory = function ({commit}, history) {
-  commit(types.SET_PLAY_HISTORY, history)
+  commit(types.SET_PLAY_HISTORY, savePlay(history))
 }
 
 export const deleteSong = function ({commit, state}, song) {
@@ -122,5 +122,5 @@ export const insertSong = function ({commit, state}, song) {
   commit(types.SET_SEQUENCE_LIST, sequenceList)
   commit(types.SET_CURRENT_INDEX, currentIndex)
   commit(types.SET_FULL_SCREEN, true)
-  commit(types.SET_PLAYING_STATE, true)
+  commit(types.SET_PLAYING_STATE, false)
 }

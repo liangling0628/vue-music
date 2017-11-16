@@ -101,7 +101,7 @@
 
   .search
     .search-box-wrapper
-      background-image: url(//y.gtimg.cn/mediastyle/yqq/img/bg_search.jpg)
+      background-image: url(../../common/image/bg_search.jpg)
       padding: 20px
       background-size: cover
       margin: 10px 0

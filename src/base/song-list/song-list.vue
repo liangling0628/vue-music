@@ -39,11 +39,11 @@
         return `${song.singer}.${song.album}`
       },
       getRankCls(index) {
-//        if (index <= 2) {
-//          return `icon icon${index}`
-//        } else {
-        return 'text'
-//        }
+        if (index <= 2) {
+          return 'ran'
+        } else {
+          return 'text'
+        }
       },
       getRankText(index) {
 //        if (index > 2) {
@@ -91,6 +91,9 @@
             bg-image2('third')
         .text
           color: #999
+          font-size: $font-size-large
+        .ran
+          color: #ff4222
           font-size: $font-size-large
       .content
         flex: 1

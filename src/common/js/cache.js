@@ -3,16 +3,17 @@ import storage from 'good-storage'
 const FAVORITE_KEY = '__favorite__'
 const FAVORITE_MAX_LEN = 200
 const PLAY_KEY = '__play__'
+const PLAY_MAX_LEN = 20
 const SEARCH_KY = '__serach__'
 const SEARCH_MAX_LEN = 15
 
 export function saveFavarite(song) {
   let songs = []
   let asongs = storage.get(FAVORITE_KEY, [])
-  if (typeof songs === 'object') {
-    songs.push(asongs)
-  } else {
+  if (asongs instanceof Array) {
     songs = asongs
+  } else {
+    songs.push(asongs)
   }
   insertArray(songs, song, (item) => {
     return song.id === item.id
@@ -52,7 +53,30 @@ function deleteArray(arr, compare) {
 }
 
 export function loadPlay() {
-  return storage.get(PLAY_KEY, [])
+  let data = []
+  let d = storage.get(PLAY_KEY, [])
+  if (d instanceof Array) {
+    data = d
+  } else {
+    data.push(d)
+  }
+  return data
+}
+
+export function savePlay(song) {
+  let songs = storage.get(PLAY_KEY, [])
+  insertArray(songs, song, (item) => {
+    return song.id === item.id
+  }, PLAY_MAX_LEN)
+  if (songs instanceof Array) {
+    storage.set(PLAY_KEY, songs)
+    return songs
+  } else {
+    let d = []
+    d.push(songs)
+    storage.set(PLAY_KEY, d)
+    return d
+  }
 }
 
 export function loadSearh() {
@@ -87,4 +111,15 @@ export function deleteFromArray(arr, compare) {
   if (index > -1) {
     arr.splice(index, 1)
   }
+}
+
+export function loadFavarite() {
+  let data = []
+  let d = storage.get(FAVORITE_KEY, [])
+  if (d instanceof Array) {
+    data = d
+  } else {
+    data.push(d)
+  }
+  return data
 }

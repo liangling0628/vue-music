@@ -37,8 +37,10 @@
     .search-item
       display: flex
       align-items: center
-      height: 40px
+      height: 30px
       overflow: hidden
+      line-height: 30px;
+      font-size: 13px;
       &.list-enter-active, &.list-leave-active
         transition: all 0.1s
       &.list-enter, &.list-leave-to
