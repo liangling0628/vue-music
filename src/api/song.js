@@ -1,4 +1,5 @@
-import {songParmas} from '../common/js/config'
+import {songParmas,vKeyParams} from '../common/js/config'
+import jsonp from '../common/js/jsonp'
 import axios from 'axios'
 
 export function getLyric(mid) {
@@ -9,3 +10,8 @@ export function getLyric(mid) {
   })
 }
 
+export function getVkey(data) {
+  let url = 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg'
+  let params = Object.assign({},vKeyParams,data)
+  return jsonp(url,params)
+}

@@ -38,9 +38,8 @@
         }
         getSonList(this.disc.dissid).then((res) => {
           if (res.code === ERR_OK || res.length > 100) {
-            let ret = res.substr(21, res.length - 22)
+            let ret = res.substr(0,res.length-1).replace(/playlistinfoCallback\(/gi,'')
             ret = JSON.parse(ret)
-            console.log(ret.cdlist)
             let cdlist = ret.cdlist.length > 0 ? ret.cdlist[0].songlist : []
             this.songs = this._normalizeSongs(cdlist)
           }

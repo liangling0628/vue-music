@@ -2,7 +2,7 @@ import * as types from './mutation_types'
 import {playMode} from '../common/js/config'
 import {shuffle} from '../common/js/until'
 import {saveFavarite, deleteFavarite, saveSearch, deleteSearch, clearSearch, savePlay} from '../common/js/cache'
-
+import {getVkey} from '../api/song'
 export const selectPlay = function ({commit, state}, {list, index}) {
   commit(types.SET_SEQUENCE_LIST, list)
   if (state.mode === playMode.random) {
@@ -20,7 +20,8 @@ export const selectPlay = function ({commit, state}, {list, index}) {
 function findIndex(list, song) {
   return list.findIndex((item) => {
     return item.id === song.id
-  })
+  }
+)
 }
 
 export const randomPlay = function ({commit, state}, {list}) {
@@ -123,4 +124,18 @@ export const insertSong = function ({commit, state}, song) {
   commit(types.SET_CURRENT_INDEX, currentIndex)
   commit(types.SET_FULL_SCREEN, true)
   commit(types.SET_PLAYING_STATE, false)
+}
+
+export const setCurrentSongUrl = function ({commit, state}, index) {
+  commit(types.SET_CURRENT_INDEX, index)
+  let item = state.playlist[index]
+  if(state.playlist.length){
+      getVkey({filename: `C400${state.playlist[index].mid}.m4a`, songmid: state.playlist[index].mid})
+        .then(res => {
+        let params = res.data.items[0]
+        state.playlist[index].fileName = params.filename
+      state.playlist[index].vkey = params.vkey
+      state.playlist[index].url = `http://dl.stream.qqmusic.qq.com/${params.filename}?vkey=${params.vkey}&guid=3112047418&uin=0&fromtag=66`
+    })
+  }
 }

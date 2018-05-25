@@ -222,6 +222,9 @@
         }
       },
       loop() {
+        if (!/dl\.stream/.test(this.currentSong.url)) {
+          this.setCurrentSongUrl(this.currentIndex)
+        }
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
         this.setPlayingState(true)
@@ -243,7 +246,8 @@
           if (index === this.playlist.length) {
             index = 0
           }
-          this.setCurrentIndex(index)
+          this.setCurrentSongUrl(index)
+          // this.setCurrentIndex(index)
           clearTimeout(this.newTimeOut)
           if (!this.playingNew) {
             this.setPlayingState(false)
@@ -273,7 +277,8 @@
           if (index === -1) {
             index = this.playlist.length - 1
           }
-          this.setCurrentIndex(index)
+          // this.setCurrentIndex(index)
+          this.setCurrentSongUrl(index)
           clearTimeout(this.newTimeOut)
           if (!this.playingNew) {
             this.setPlayingState(false)
@@ -446,6 +451,7 @@
       currentSong(newSong, oldSong) {
         if (!this.oldSong) {
           this.playingNew = false
+          this.setCurrentSongUrl(this.currentIndex)
         }
         if (!newSong.id) {
           return

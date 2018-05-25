@@ -86,7 +86,8 @@ export const playerMixin = {
     }),
     ...mapActions([
       'saveFavoriteList',
-      'deleteFavariateList'
+      'deleteFavariateList',
+      'setCurrentSongUrl'
     ])
   }
 }

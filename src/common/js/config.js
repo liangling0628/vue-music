@@ -158,3 +158,22 @@ export const searchParams = {
   remoteplace: 'txt.mqq.all',
   _: +new Date()
 }
+
+export const vKeyParams = {
+  g_tk: 5381,
+  jsonpCallback: `MusicJsonCallback${Math.random()}`.replace('0.', ''),
+  loginUin: 0,
+  hostUin: 0,
+  format: 'json',
+  inCharset: 'utf8',
+  outCharset: 'utf-8',
+  notice: 0,
+  platform: 'yqq',
+  needNewCode: 0,
+  cid: 205361747,
+  callback: `MusicJsonCallback${Math.random()}`.replace('0.', ''),
+  uin: 0,
+  songmid: '001J5QJL1pRQYB',
+  filename: 'C400001J5QJL1pRQYB.m4a',
+  guid: 3112047418,
+}
